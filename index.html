@@ -23,12 +23,12 @@
       <div class="form-group">
         <label for="battery-select">Battery:</label>
         <select id="battery-select">
-          <option value="Stock XR">Stock XR</option>
-          <option value="CBXR/JWXR">CBXR/JWXR</option>
-          <option value="CBSP">CBSP</option>
-          <option value="Speed Pack">Speed Pack</option>
-          <option value="Torque Pack">Torque Pack</option>
-          <option value="Meat Pack">Meat Pack</option>
+          <option value="Stock XR">Stock XR (15s2p VTC6)</option>
+          <option value="CBXR/JWXR">CBXR/JWXR (15s3p M35A)</option>
+          <option value="CBSP">CBSP (15s1p P42A)</option>
+          <option value="Speed Pack">Speed Pack (20s2p P28A)</option>
+          <option value="Torque Pack">Torque Pack (18s2p P42A)</option>
+          <option value="Meat Pack">ME4T Pack (18s2p 50S)</option>
         </select>
       </div>
     </div>
@@ -36,92 +36,109 @@
     <div class="button-container">
       <button id="gen-button">Generate Configuration</button>
       <button id="save-button">Download Configuration</button>
+      <button id="clear-button">Clear Configuration</button>
+    </div>
+
+    <div class="key-container">
+      <div class="key">
+        <div class="red-square"></div>
+        <div class="key-text">
+          <span class="bold">= Must be set after <span class="highlight">every</span> Motor Setup</span>
+        </div>
+      </div>
+      <div class="key">
+        <div class="yellow-square"></div>
+        <div class="key-text">
+          <span class="bold">= Must be set after <span class="highlight">initial</span> Motor Setup</span>
+        </div>
+      </div>
     </div>
 
     <div class="text-field-list">
       <div class="column">
         <h2>Current Limits</h2>
         <ul>
-          <li>Motor Current Max: <input type="text" id="motor-current-max"> A</li>
-          <li>Motor Current Max Brake: <input type="text" id="motor-current-max-brake"> A</li>
-          <li>Absolute Maximum Current: <input type="text" id="absolute-max-current"> A</li>
-          <li>Battery Current Max: <input type="text" id="battery-current-max"> A</li>
-          <li>Battery Current Max Regen: <input type="text" id="battery-current-max-regen"> A</li>
+          <li>Motor Current Max: <input type="text" id="l_current_max"> A</li>
+          <li>Motor Current Max Brake: <input type="text" id="l_current_min"> A</li>
+          <li>Absolute Maximum Current: <input type="text" id="l_abs_current_max"> A</li>
+          <li>Battery Current Max: <input type="text" id="l_in_current_max"> A</li>
+          <li>Battery Current Max Regen: <input type="text" id="l_in_current_min"> A</li>
         </ul>
 
         <h2>Voltage Cutoffs</h2>
         <ul>
-          <li>Voltage Cutoff Start: <input type="text" id="voltage-cutoff-start"> V</li>
-          <li>Voltage Cutoff End: <input type="text" id="voltage-cutoff-end"> V</li>
+          <li>Voltage Cutoff Start: <input type="text" id="l_battery_cut_start"> V</li>
+          <li>Voltage Cutoff End: <input type="text" id="l_battery_cut_end"> V</li>
         </ul>
 
         <h2>Temperature Cutoffs</h2>
         <ul>
-          <li>MOSFET Temp Cutoff Start: <input type="text" id="mosfet-temp-cutoff-start"> °C</li>
-          <li>MOSFET Temp Cutoff End: <input type="text" id="mosfet-temp-cutoff-end"> °C</li>
-          <li>Motor Temp Cutoff Start: <input type="text" id="motor-temp-cutoff-start"> °C</li>
-          <li>Motor Temp Cutoff End: <input type="text" id="motor-temp-cutoff-end"> °C</li>
+          <li>Acceleration Temp Decrease: <input type="text" id="l_temp_accel_dec"> %</li>
+          <li>MOSFET Temp Cutoff Start: <input type="text" id="l_temp_fet_start"> °C</li>
+          <li>MOSFET Temp Cutoff End: <input type="text" id="l_temp_fet_end"> °C</li>
+          <li>Motor Temp Cutoff Start: <input type="text" id="l_temp_motor_start"> °C</li>
+          <li>Motor Temp Cutoff End: <input type="text" id="l_temp_motor_end"> °C</li>
         </ul>
 
         <h2>Additional Info</h2>
         <ul>
-          <li>Motor Poles: <input type="text" id="motor-poles"> </li>
-          <li>Gear Ratio: <input type="text" id="gear-ratio"> </li>
-          <li>Wheel Diameter: <input type="text" id="wheel-diameter"> mm</li>
-          <li>Battery Type: 
-            <select id="battery-type">
+          <li>Motor Poles: <input type="text" id="si_motor_poles"> </li>
+          <li>Gear Ratio: <input type="text" id="si_gear_ratio"> </li>
+          <li>Wheel Diameter: <input type="text" id="si_wheel_diameter"> mm</li>
+          <li>Battery Type:
+            <select id="si_battery_type">
               <option value=""></option>
               <option value="0">Li-ion (3.0-4.2V)</option>
               <option value="1">Li-iron (2.6-3.6V)</option>
               <option value="2">Lead Acid</option>
             </select>
           </li>
-          <li>Battery Cells Series: <input type="text" id="battery-cells-series"> </li>
-          <li>Battery Capacity: <input type="text" id="battery-capacity"> Ah</li>
+          <li>Battery Cells Series: <input type="text" id="si_battery_cells"> </li>
+          <li>Battery Capacity: <input type="text" id="si_battery_ah"> Ah</li>
         </ul>
       </div>
 
       <div class="column">
         <h2>FOC Values</h2>
         <ul>
-          <li>Motor Resistance: <input type="text" id="motor-resistance"> mΩ</li>
-          <li>Motor Inductance: <input type="text" id="motor-inductance"> μH</li>
-          <li>Motor Inductance Difference: <input type="text" id="motor-inductance-difference"> μH</li>
-          <li>Motor Flux Linkage: <input type="text" id="motor-flux-linkage"> mWb</li>
-          <li>Current KP: <input type="text" id="current-kp"> </li>
-          <li>Current KI: <input type="text" id="current-ki"> </li>
-          <li>Observer Gain: <input type="text" id="observer-gain"> </li>
+          <li>Motor Resistance: <input type="text" id="foc_motor_r"> mΩ</li>
+          <li>Motor Inductance: <input type="text" id="foc_motor_l"> μH</li>
+          <li>Motor Inductance Difference: <input type="text" id="foc_motor_ld_lq_diff"> μH</li>
+          <li>Motor Flux Linkage: <input type="text" id="foc_motor_flux_linkage"> mWb</li>
+          <li>Current KP: <input type="text" id="foc_current_kp"> </li>
+          <li>Current KI: <input type="text" id="foc_current_ki"> </li>
+          <li>Observer Gain: <input type="text" id="foc_observer_gain"> </li>
         </ul>
 
         <h2>Field Weakening</h2>
         <ul>
-          <li>FW Current Max: <input type="text" id="fw-current-max"> A</li>
-          <li>FW Duty Start: <input type="text" id="fw-duty-start"> %</li>
-          <li>FW Ramp Time: <input type="text" id="fw-ramp-time"> ms</li>
-          <li>Q Axis Current Factor: <input type="text" id="q-axis-current-factor"> %</li>
+          <li>FW Current Max: <input type="text" id="foc_fw_current_max"> A</li>
+          <li>FW Duty Start: <input type="text" id="foc_fw_duty_start"> %</li>
+          <li>FW Ramp Time: <input type="text" id="foc_fw_ramp_time"> ms</li>
+          <li>Q Axis Current Factor: <input type="text" id="foc_fw_q_current_factor"> %</li>
         </ul>
 
         <h2>Misc. Values</h2>
         <ul>
-          <li>Sensorless ERPM (HFI): <input type="text" id="sensorless-erpm"> ERPM</li>
-          <li>Hall Interpolation ERPM: <input type="text" id="hall-interpolation-erpm"> ERPM</li>
-          <li>Zero Vector Frequency: <input type="text" id="zero-vector-frequency"> kHz</li>
+          <li>Sensorless ERPM: <input type="text" id="foc_sl_erpm"> ERPM</li>
+          <li>Hall Interpolation ERPM: <input type="text" id="foc_hall_interp_erpm"> ERPM</li>
+          <li>Zero Vector Frequency: <input type="text" id="foc_f_zv"> kHz</li>
           <li>Offset Calibration at Boot:
-            <select id="calibration-at-boot">
+            <select id="foc_offsets_cal_on_boot">
               <option value=""></option>
               <option value="0">False</option>
               <option value="1">True</option>
             </select>
           </li>
           <li>BMS Type:
-            <select id="bms-type">
+            <select id="bms.type">
               <option value=""></option>
               <option value="0">None</option>
               <option value="1">VESC BMS</option>
             </select>
           </li>
           <li>Observer Type:
-            <select id="observer-type">
+            <select id="foc_observer_type">
               <option value=""></option>
               <option value="0">Ortega Original</option>
               <option value="1">MXLemming</option>
@@ -129,6 +146,30 @@
               <option value="3">MXLemming Lambda Comp</option>
             </select>
           </li>
+          <hr>
+          <li>Sensor Mode:
+            <select id="foc_sensor_mode">
+              <option value=""></option>
+              <option value="0">Sensorless</option>
+              <option value="1">Encoder</option>
+              <option value="2">Hall Sensors</option>
+              <option value="3">HFI</option>
+              <option value="4">VSS</option>
+              <option value="5">45 Deg V0V7 HFI (Silent)</option>
+              <option value="6">45 Deg V0 HFI</option>
+              <option value="7">Coupled V0V7 HFI (Silent)</option>
+              <option value="8">Coupled V0 HFI</option>
+            </select>
+          </li>
+          <li>Openloop ERPM: <input type="text" id="foc_openloop_rpm"> ERPM</li>
+          <li>Temp Comp:
+            <select id="foc_temp_comp">
+              <option value=""></option>
+              <option value="0">False</option>
+              <option value="1">True</option>
+            </select>
+          </li>
+          <li>Temp Comp Base Temp: <input type="text" id="foc_temp_comp_base_temp"> °C</li>
         </ul>
       </div>
     </div>
